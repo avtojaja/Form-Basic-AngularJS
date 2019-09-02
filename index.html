@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>საიტზე რეგისტრაცია</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.js"></script>
+</head>
+<body ng-app="FormApp">
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-md-12 m-4">
+				<h1>საიტზე რეგისტრაცია</h1>
+			</div>
+		</div>
+		<div class="row">
+			<form ng-controller="FormController" name="myForm" class="text-center mx-auto" novalidate autocomplete="off">
+				<div class="m-3">მიუთითეთ თქვენი სახელი:</div>
+				<div>
+					<input type="text" class="form-control my-3" name="user" ng-model="user" required>
+					<span class="text-danger" ng-show="myForm.user.$dirty && myForm.user.$invalid">
+						<span ng-show="myForm.user.$error.required">სახელის მითითება აუცილებელია!</span>
+					</span>
+				</div>
+				<div class="my-3">
+					<input type="submit" class="btn btn-primary" value="რეგისტრაცია" ng-click="register()" ng-disabled="myForm.user.$dirty && myForm.user.$invalid || !user">
+				</div>
+				<label ng-show="user">თქვენ რეგისტრირდებით როგორც: {{user}}</label>
+			</form>
+		</div>
+	</div>
+
+	<script>
+		var app = angular.module('FormApp', []);
+
+		app.controller('FormController', function($scope) {
+			$scope.Display = function() {
+				$scope.user = 'Angular';
+			}
+
+			$scope.register = function() {
+				alert($scope.user + ', თქვენ წარმატებით დარეგისტრირდით საიტზე!');
+			};
+		});
+	</script>
+</body>
+</html>
